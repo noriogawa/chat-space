@@ -1,0 +1,33 @@
+.chat-main
+  .main-header
+    .main-header__left-box
+      .main-header__left-box__current-group
+        グループ名
+      .main-header__left-box__member-list
+        Member:
+    = link_to "#", class: "main-header__edit-button" do
+      Edit
+  .messages
+    .message
+      .message__upper-info
+        .message__upper-info__talker
+          name
+        .message__upper-info__date
+          2020/01/01
+      %p.message__text
+        リスト
+      .message__upper-info
+        .message__upper-info__talker
+          name
+        .message__upper-info__date
+          2020/01/01
+      %p.message__text
+        リスト
+  .form
+    %form.new_message
+      .input-box
+        %input{type: "txet", class: "input-box__text", placeholder: "type a message"}
+        %label{class: "input-box__image"}
+          = icon('fa','image')
+          %input{type: 'file', class: "input-box__image__file"}
+      %input{type: 'submit', class: 'submit-btn'}
