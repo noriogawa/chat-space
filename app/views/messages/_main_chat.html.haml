@@ -2,32 +2,20 @@
   .main-header
     .main-header__left-box
       .main-header__left-box__current-group
-        グループ名
+        = @group.name
       .main-header__left-box__member-list
         Member:
-    = link_to "#", class: "main-header__edit-button" do
+        - @group.users.each do |user|
+          = user.name
+    = link_to edit_group_path(@group), class: "main-header__edit-button" do
       Edit
   .messages
-    .message
-      .message__upper-info
-        .message__upper-info__talker
-          name
-        .message__upper-info__date
-          2020/01/01
-      %p.message__text
-        リスト
-      .message__upper-info
-        .message__upper-info__talker
-          name
-        .message__upper-info__date
-          2020/01/01
-      %p.message__text
-        リスト
+    = render @messages
   .form
-    %form.new_message
+    = form_for [@group, @message] do |f|
       .input-box
-        %input{type: "txet", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fa','image')
-          %input{type: 'file', class: "input-box__image__file"}
-      %input{type: 'submit', class: 'submit-btn'}
+        = f.text_field :content, class: 'input-box__text', placeholder: 'type a message'
+        = f.label :image, class: 'input-box__image' do
+          = icon('fa','image', class: 'icon')
+          = f.file_field :image, class: 'input-box__image__file'
+      = f.submit 'Send', class: 'submit-btn'
